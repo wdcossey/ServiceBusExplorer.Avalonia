@@ -1,0 +1,205 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:ServiceBusExplorer.ViewModels;assembly=ServiceBusExplorer"
+        Icon="resm:ServiceBusExplorer.Assets.avalonia-logo.ico"
+        Title="ServiceBusExplorer"
+        Background="#D7E4F2">
+
+  <!--<Window.Styles>
+    <Style Selector="Border">
+      <Setter Property="FontSize" Value="24"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+  </Window.Styles>-->
+
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+
+  <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8" >
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="200"/>
+    </Grid.RowDefinitions>
+
+    <Menu Margin="0 0 0 4">
+      <MenuItem Header="_File">
+        <MenuItem Header="_Connect"/>
+        <Separator/>
+        <MenuItem Header="_Exit" Command="{Binding MenuExitCommand}"/>
+      </MenuItem>
+      <MenuItem Header="_Edit">
+        <MenuItem Header="_Clear Log"/>
+        <MenuItem Header="_Save Log As..."/>
+      </MenuItem>
+      <MenuItem Header="_Actions">
+        <MenuItem Header="Create IoT Hub Listener"/>
+        <MenuItem Header="Create Event Hub Listener"/>
+        <Separator/>
+        
+      </MenuItem>
+      <MenuItem Header="_View">
+        <MenuItem Header="Set _Default Layout"/>
+        <MenuItem Header="_Log Window"/>
+        <Separator/>
+        <MenuItem Header="_Options..."/>
+      </MenuItem>
+      <MenuItem Header="_Help">
+        <MenuItem Header="_About Service Bus Explorer"/>
+      </MenuItem>
+    </Menu>
+
+    <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RowDefinitions="*">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="300"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+
+      <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+        <Border Grid.Row="0" Background="White" BorderBrush="#99B4D1" BorderThickness="1" VerticalAlignment="Stretch">
+
+          <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border>
+              <Border.Background>
+                <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                  <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0" Color="#BFCDDB"/>
+                    <GradientStop Offset="1" Color="#9AB5D2"/>
+                  </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+              </Border.Background>
+              <StackPanel Orientation="Horizontal">
+                <Path Fill="#4A77B8" Margin="4 0 0 0" Data="M 12 2 C 8.741068 2 5.8486894 3.5773875 4.0214844 6 L 4 6 L 4 6.0273438 C 2.7499527 7.6966931 2 9.7603852 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 15 4.5839844 C 17.935098 5.7673596 20 8.6326468 20 12 C 20 14.087831 19.200587 15.978318 17.898438 17.400391 C 17.642583 16.590687 16.894567 16 16 16 L 15 16 L 15 13 C 15 12.448 14.552 12 14 12 L 9 12 L 9 10 L 10 10 C 10.552 10 11 9.552 11 9 L 11 7 L 13 7 C 14.105 7 15 6.105 15 5 L 15 4.5839844 z M 4.2070312 10.207031 L 6 12 L 9 15 L 9 16 C 9 17.105 9.895 18 11 18 L 11 19.931641 C 7.0457719 19.441154 4 16.090654 4 12 C 4 11.382188 4.0755245 10.784033 4.2070312 10.207031 z" Height="14" Stretch="Uniform"/>
+                <TextBlock Text="Service Bus Namespace" FontWeight="SemiBold" Margin="4" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+              </StackPanel>
+            </Border>
+
+            <TreeView Grid.Row="1" VerticalAlignment="Stretch" BorderThickness="0" >
+              <TreeView.Items>
+                <TreeViewItem>
+                  <TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal" Background="#01000000" >
+                      <Path Fill="#03A9F4" Height="18" Stretch="Uniform" Data="M 26 0 L 12 1.96875 L 12 12 L 26 12 Z M 10 2.25 L 0 3.65625 L 0 12 L 10 12 Z M 0 14 L 0 22.40625 L 10 23.78125 L 10 14 Z M 12 14 L 12 24.0625 L 26 25.96875 L 26 14 Z "></Path>
+                      <TextBlock Margin="8 0 0 0" Text="sb://service-bus-name" />
+                    </StackPanel>
+                  </TreeViewItem.Header>
+                  
+                  <TreeViewItem.Items>
+                    <TreeViewItem >
+                      <TreeViewItem.Header>
+                        <StackPanel Orientation="Horizontal" Background="#01000000">
+                          <Path Fill="Blue" Height="18" Stretch="Uniform" Data="M 25.001953 0 C 12.439953 -1.1842379e-15 4 4.6530469 4 8.9980469 C 4 13.345047 12.439953 18 25.001953 18 C 37.562953 18 46 13.345047 46 8.9980469 C 46 4.6530469 37.562953 0 25.001953 0 z M 4 13.609375 L 4 19.150391 C 4 23.424391 12.439953 28 25.001953 28 C 37.562953 28 46 23.424391 46 19.150391 L 46 13.609375 C 42.328 17.363375 34.412953 20 25.001953 20 C 15.588953 20 7.673 17.362375 4 13.609375 z M 4 23.910156 L 4 29.195312 C 4 33.468312 12.439953 38 25.001953 38 C 37.562953 38 46 33.467313 46 29.195312 L 46 23.910156 C 42.328 27.662156 34.412953 30 25.001953 30 C 15.588953 30 7.673 27.662156 4 23.910156 z M 4 33.955078 L 4 39.150391 C 4 43.423391 12.439953 48 25.001953 48 C 37.562953 48 46 43.423391 46 39.150391 L 46 33.955078 C 42.328 37.708078 34.412953 40 25.001953 40 C 15.588953 40 7.673 37.708078 4 33.955078 z"></Path>
+                          <TextBlock Margin="8 0 0 0" Text="Queues" />
+                        </StackPanel>
+                      </TreeViewItem.Header>
+                    </TreeViewItem>
+                    <TreeViewItem >
+                      <TreeViewItem.Header>
+                        <StackPanel Orientation="Horizontal" Background="#01000000">
+                          <Path Fill="Silver" Height="18" Stretch="Uniform" Data="M 25.001953 0 C 12.439953 -1.1842379e-15 4 4.6530469 4 8.9980469 C 4 13.345047 12.439953 18 25.001953 18 C 37.562953 18 46 13.345047 46 8.9980469 C 46 4.6530469 37.562953 0 25.001953 0 z M 4 13.609375 L 4 19.150391 C 4 23.424391 12.439953 28 25.001953 28 C 37.562953 28 46 23.424391 46 19.150391 L 46 13.609375 C 42.328 17.363375 34.412953 20 25.001953 20 C 15.588953 20 7.673 17.362375 4 13.609375 z M 4 23.910156 L 4 29.195312 C 4 33.468312 12.439953 38 25.001953 38 C 37.562953 38 46 33.467313 46 29.195312 L 46 23.910156 C 42.328 27.662156 34.412953 30 25.001953 30 C 15.588953 30 7.673 27.662156 4 23.910156 z M 4 33.955078 L 4 39.150391 C 4 43.423391 12.439953 48 25.001953 48 C 37.562953 48 46 43.423391 46 39.150391 L 46 33.955078 C 42.328 37.708078 34.412953 40 25.001953 40 C 15.588953 40 7.673 37.708078 4 33.955078 z"></Path>
+                          <TextBlock Margin="8 0 0 0" Text="Topics" />
+                        </StackPanel>
+                      </TreeViewItem.Header>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Event Hubs"/>
+                    <TreeViewItem Header="Relays"/>
+                  </TreeViewItem.Items>
+                </TreeViewItem>
+              </TreeView.Items>
+            </TreeView>
+          </Grid>
+
+        </Border>
+
+      </Grid>
+
+      <GridSplitter Grid.Column="1" Grid.Row="0" Background="Transparent"/>
+
+      <Grid Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+
+        <Border Grid.Row="0" BorderBrush="#99B4D1" BorderThickness="1">
+          <!--<TabControl Classes="sidebar" Name="Sidebar">
+
+          <TabItem Header="Description">
+
+          </TabItem>
+          <TabItem Header="Authorization Rules">
+
+          </TabItem>
+
+        </TabControl>-->
+
+          <Border VerticalAlignment="Top">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStop Offset="0" Color="#BFCDDB"/>
+                  <GradientStop Offset="1" Color="#9AB5D2"/>
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel Orientation="Horizontal">
+              <Path Fill="#4A77B8" Margin="4 0 0 0" Data="M 12 2 C 8.741068 2 5.8486894 3.5773875 4.0214844 6 L 4 6 L 4 6.0273438 C 2.7499527 7.6966931 2 9.7603852 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 15 4.5839844 C 17.935098 5.7673596 20 8.6326468 20 12 C 20 14.087831 19.200587 15.978318 17.898438 17.400391 C 17.642583 16.590687 16.894567 16 16 16 L 15 16 L 15 13 C 15 12.448 14.552 12 14 12 L 9 12 L 9 10 L 10 10 C 10.552 10 11 9.552 11 9 L 11 7 L 13 7 C 14.105 7 15 6.105 15 5 L 15 4.5839844 z M 4.2070312 10.207031 L 6 12 L 9 15 L 9 16 C 9 17.105 9.895 18 11 18 L 11 19.931641 C 7.0457719 19.441154 4 16.090654 4 12 C 4 11.382188 4.0755245 10.784033 4.2070312 10.207031 z" Height="14" Stretch="Uniform"/>
+              <TextBlock Text="{Binding Greeting}" FontWeight="SemiBold" Margin="4" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+          </Border>
+        </Border>
+
+      </Grid>
+    </Grid>
+
+
+    <GridSplitter Grid.Row="2" Background="Transparent"/>
+
+    <Grid Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+      <Border Grid.Row="0" Background="White" BorderBrush="#99B4D1" BorderThickness="1">
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          
+          <Border Grid.Row="0" VerticalAlignment="Top">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStop Offset="0" Color="#BFCDDB"/>
+                  <GradientStop Offset="1" Color="#9AB5D2"/>
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel Orientation="Horizontal">
+              <Path Fill="#4A77B8" Margin="4 0 0 0" Data="M 2 2 L 2 4 L 22 4 L 22 2 Z M 4 6 C 2.898438 6 2 6.898438 2 8 L 2 10 C 2 11.101563 2.898438 12 4 12 L 6 12 C 7.101563 12 8 11.101563 8 10 L 8 8 C 8 6.898438 7.101563 6 6 6 Z M 10 6 L 10 8 L 21 8 L 21 6 Z M 10 10 L 10 12 L 19 12 L 19 10 Z M 4 15 C 2.898438 15 2 15.898438 2 17 L 2 19 C 2 20.101563 2.898438 21 4 21 L 6 21 C 7.101563 21 8 20.101563 8 19 L 8 17 C 8 15.898438 7.101563 15 6 15 Z M 10 15 L 10 17 L 21 17 L 21 15 Z M 10 19 L 10 21 L 19 21 L 19 19 Z " Width="14" Height="14" Stretch="Uniform" VerticalAlignment="Center"/>
+              <TextBlock Text="Log" FontWeight="SemiBold" Margin="4" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+          </Border>
+
+          <ListBox Grid.Row="1" BorderThickness="0" BorderBrush="Transparent" >
+
+            <ListBox.Items>
+              <TextBlock Text="&lt;15:32:11&gt; The application is now connected to the sb://service-bus-name/ service bus namespace."/>
+              <TextBlock Text="&lt;15:32:11&gt; MessagingFactory successfully created"/>
+              <TextBlock Text="&lt;15:32:13&gt; The topic chat has been successfully retrieved."/>
+              <TextBlock Text="&lt;15:32:13&gt; The topic prematch-transform-tipex has been successfully retrieved."/>
+              <TextBlock Text="&lt;15:32:13&gt; The subscription subscription-name-here for the topic-name-here topic has been successfully retrieved."/>
+            </ListBox.Items>
+          </ListBox>
+        </Grid>
+      </Border>
+    </Grid>
+  </Grid>
+
+
+</Window>
